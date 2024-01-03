@@ -18,6 +18,19 @@ public class FieldPerfabObject
         Col = col;
         _instance = instance;
     }
+
+    public bool TryGetTextByName(string name, out Text text)
+    {
+        text = null;
+        Text[] texts = _instance.GetComponentsInChildren<Text>();
+        foreach (var currenText in texts){
+            if(currenText.name.Equals(name)){
+                text = currenText;
+                return true; 
+            }
+        }
+        return false;
+    }
     // Thuộc tính lấy hàng (chỉ đọc).
     public int Row { get => _row; }
     // Thuộc tính lấy và thiết lập cột.
@@ -33,6 +46,21 @@ public class FieldPerfabObject
         _instance.GetComponent<Image>().color = new Color(1f, 1f, 1f, 1f);
     }
     public void setnumber(int number){
-        _instance.GetComponentInChildren<Text>().text = number.ToString();
+        if(TryGetTextByName("value", out Text text)){
+            text.text = number.ToString();
+            for(int i = 1; i < 10; i++){
+               if(TryGetTextByName($"Number_{i}", out Text textnumber)){
+                    textnumber.text = "";
+                }
+            }
+        }
+    }
+    public void SetnoteNumber(int number){
+        if(TryGetTextByName($"Number_{number}", out Text text)){
+            text.text = number.ToString();
+            if(TryGetTextByName("value", out Text textvalue)){
+                textvalue.text = "";
+            }
+        }
     }
 }

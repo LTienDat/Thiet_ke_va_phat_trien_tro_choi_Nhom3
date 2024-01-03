@@ -12,12 +12,25 @@ public class GremanGame : MonoBehaviour
     public GameObject FieldPrefabs;
     public GameObject ControllPanal;
     public GameObject ControllPrefab;
+    public Button ButtonNote;
 
     // Start is called before the first frame update
     void Start()
     {
         CreateFrefabs();
         CreateControll();
+    }
+
+    private bool IsButtonNoteActive = false;
+    public void ClickOn_ButtonNote(){
+        Debug.Log($"Click on ButtonNote");
+        if(IsButtonNoteActive){
+            IsButtonNoteActive = false;
+            ButtonNote.GetComponent<Image>().color = new Color(1f, 1f, 1f, 1f);
+        }else{
+            IsButtonNoteActive = true;
+            ButtonNote.GetComponent<Image>().color = new Color(0.71f, 0.95f, 0.97f, 1f);
+        }
     }
     // Từ điển để lưu trữ các phiên bản FieldPerfabObject dựa trên hàng và cột của chúng.
     private Dictionary<Tuple<int, int>, FieldPerfabObject> FieldPerfabObjectDic = 
@@ -44,14 +57,6 @@ public class GremanGame : MonoBehaviour
 
                 // Thêm trình xử lý sự kiện nhấp chuột vào thành phần Nút trong phiên bản.
                 instance.GetComponent<Button>().onClick.AddListener( () => ClickOn_ControllPrefab(controllprefab));
-            // if (instance != null)
-            // {
-            //     Text textComponent = instance.GetComponentInChildren<Text>();
-            //     if (textComponent != null)
-            //     {
-                   
-            //     }          
-            // }
             }
     }
     // Theo dõi FieldPerfabObject hiện đang được di chuột.
@@ -59,8 +64,13 @@ public class GremanGame : MonoBehaviour
 
     private void ClickOn_ControllPrefab(controllprefabObject controllprefab){
         Debug.Log($"Click on controllPrefab number: {controllprefab.number}");
+         
          if(currentHoverObject != null){
-            currentHoverObject.setnumber(controllprefab.number);
+            if(IsButtonNoteActive){
+                currentHoverObject.SetnoteNumber(controllprefab.number);
+            }else{
+                currentHoverObject.setnumber(controllprefab.number);
+            }
         }
     }
     // Phương thức được gọi khi một phiên bản FieldPrefabs được nhấp vào.
