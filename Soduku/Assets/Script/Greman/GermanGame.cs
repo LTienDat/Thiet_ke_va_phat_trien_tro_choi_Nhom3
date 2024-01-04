@@ -21,13 +21,14 @@ public class GremanGame : MonoBehaviour
         CreateControll();
         CreateSodoku();
     }
+    private sodokuObject currentSodokuobject;
     private void CreateSodoku(){
-        sodokuObject sodokuobject = SodokuGennerator.CreateSodokuObject();
+        currentSodokuobject = SodokuGennerator.CreateSodokuObject();
         for (int row = 0; row < 9; row++)
         {
             for (int col = 0; col < 9; col++)
             {
-                var currentValue = sodokuobject.value[row,col];
+                var currentValue = currentSodokuobject.value[row,col];
                 if(currentValue != 0){
                 var field_object = FieldPerfabObjectDic[new Tuple<int, int>(row,col)];
                 field_object.setnumber(currentValue);
@@ -64,17 +65,17 @@ public class GremanGame : MonoBehaviour
             }
         }
     }
-         public void CreateControll(){
-            for(int i = 1; i <= 9; i++){
-                GameObject instance = GameObject.Instantiate(ControllPrefab, ControllPanal.transform);
-                instance.GetComponentInChildren<Text>().text = i.ToString();
-                controllprefabObject controllprefab = new controllprefabObject();
-                controllprefab.number = i;
+        public void CreateControll(){
+        for(int i = 1; i <= 9; i++){
+            GameObject instance = GameObject.Instantiate(ControllPrefab, ControllPanal.transform);
+            instance.GetComponentInChildren<Text>().text = i.ToString();
+            controllprefabObject controllprefab = new controllprefabObject();
+            controllprefab.number = i;
 
-                // Thêm trình xử lý sự kiện nhấp chuột vào thành phần Nút trong phiên bản.
-                instance.GetComponent<Button>().onClick.AddListener( () => ClickOn_ControllPrefab(controllprefab));
-            }
-    }
+            // Thêm trình xử lý sự kiện nhấp chuột vào thành phần Nút trong phiên bản.
+            instance.GetComponent<Button>().onClick.AddListener( () => ClickOn_ControllPrefab(controllprefab));
+        }
+        }
     // Theo dõi FieldPerfabObject hiện đang được di chuột.
     private FieldPerfabObject currentHoverObject;
 
@@ -85,7 +86,12 @@ public class GremanGame : MonoBehaviour
             if(IsButtonNoteActive){
                 currentHoverObject.SetnoteNumber(controllprefab.number);
             }else{
-                currentHoverObject.setnumber(controllprefab.number);
+                int currenNumber = controllprefab.number;
+                int row = currentHoverObject.Row;
+                int col = currentHoverObject.Col;
+                if(currentSodokuobject.IsPossibleNumberInCPosition(currenNumber, row, col)){
+                    currentHoverObject.setnumber(controllprefab.number);
+                }
             }
         }
     }
