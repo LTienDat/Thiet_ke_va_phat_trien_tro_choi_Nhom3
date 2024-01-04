@@ -19,6 +19,22 @@ public class GremanGame : MonoBehaviour
     {
         CreateFrefabs();
         CreateControll();
+        CreateSodoku();
+    }
+    private void CreateSodoku(){
+        sodokuObject sodokuobject = SodokuGennerator.CreateSodokuObject();
+        for (int row = 0; row < 9; row++)
+        {
+            for (int col = 0; col < 9; col++)
+            {
+                var currentValue = sodokuobject.value[row,col];
+                if(currentValue != 0){
+                var field_object = FieldPerfabObjectDic[new Tuple<int, int>(row,col)];
+                field_object.setnumber(currentValue);
+                field_object.IsChangeAble = false;
+                }
+            }
+        }
     }
 
     private bool IsButtonNoteActive = false;
@@ -77,13 +93,15 @@ public class GremanGame : MonoBehaviour
     private void ClickOnFikedFrefab(FieldPerfabObject fieldPerfabObject){
         Debug.Log($"Click on Prefab Row: {fieldPerfabObject.Row}, Clo: {fieldPerfabObject.Col}");
         // Bỏ đặt chế độ click chuột trên đối tượng được di chuột trước đó (nếu có).
-        if(currentHoverObject != null){
-            currentHoverObject.UnSetHoverMode();
-        }
-        // Đặt chế độ click chuột trên đối tượng được nhấp chuột.
-        currentHoverObject = fieldPerfabObject;
-        fieldPerfabObject.SetHoverMode();
+        if(fieldPerfabObject.IsChangeAble){
+            if(currentHoverObject != null){
+                currentHoverObject.UnSetHoverMode();
+            }
+            // Đặt chế độ click chuột trên đối tượng được nhấp chuột.
+            currentHoverObject = fieldPerfabObject;
+            fieldPerfabObject.SetHoverMode();
 
-    }
+            }
+        }
 }
  
