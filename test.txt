@@ -1,0 +1,8 @@
+<<<<<<< HEAD
+absvidjfjdsfldanfjhd
+=======
+File Soduku/Library/PackageCache/com.unity.burst@1.8.10/.Runtime/burst-llvm-15.dll
+ Soduku/Library/PackageCache/com.unity.burst@1.8.10/.Runtime/hostmac/dsymutil
+Soduku/Library/PackageCache/com.unity.burst@1.8.10/.Runtime/libburst-llvm-10.dylib
+Soduku/Library/PackageCache/com.unity.burst@1.8.10/.Runtime/libburst-llvm-15.so 
+>>>>>>> 1cf50ac (Su kien chon o va them so vao o da chon)
