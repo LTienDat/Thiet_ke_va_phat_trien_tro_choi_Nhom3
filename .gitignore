@@ -18,20 +18,20 @@
 # Recordings can get excessive in size
 /[Rr]ecordings/
 =======
-Soduku/[Ll]ibrary/
-Soduku/[Tt]emp/
-Soduku/[Oo]bj/
-Soduku/[Bb]uild/
-Soduku/[Bb]uilds/
-Soduku/[Ll]ogs/
-Soduku/[Uu]ser[Ss]ettings/
+Sudoku/[Ll]ibrary/
+Sudoku/[Tt]emp/
+Sudoku/[Oo]bj/
+Sudoku/[Bb]uild/
+Sudoku/[Bb]uilds/
+Sudoku/[Ll]ogs/
+Sudoku/[Uu]ser[Ss]ettings/
 
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data
-Soduku/[Mm]emoryCaptures/
+Sudoku/[Mm]emoryCaptures/
 
 # Recordings can get excessive in size
-Soduku/[Rr]ecordings/
+Sudoku/[Rr]ecordings/
 >>>>>>> 1cf50ac (Su kien chon o va them so vao o da chon)
 
 # Uncomment this line if you wish to ignore the asset store tools plugin
